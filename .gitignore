@@ -1,0 +1,6 @@
+node_modules/
+.env
+.env.local
+.env.*.local
+
+test-save-info-ed5020340e13.json
