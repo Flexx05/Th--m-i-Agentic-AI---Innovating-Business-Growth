@@ -27,9 +27,8 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const { fullName, phone, email } = req.body || {};
+    const { fullName, phone, email, website } = req.body || {};
 
-    // Honeypot chống bot cơ bản
     if (website) {
       return res.status(200).json({
         success: true,
@@ -65,15 +64,19 @@ module.exports = async function handler(req, res) {
       auth: await auth.getClient(),
     });
 
-    const stt = await sheets.spreadsheets.values.get({
+    const existingRows = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
       range: "Leads!A:A",
     });
 
-    console.log(stt);
+    const rows = existingRows.data.values || [];
+    const lastSerial = Number(rows[rows.length - 1]?.[0]);
+    const serialNumber = Number.isSafeInteger(lastSerial) && lastSerial > 0
+      ? lastSerial + 1
+      : Math.max(rows.length, 1);
     const values = [
       [
-        stt,
+        serialNumber,
         fullName.trim(),
         phone.trim(),
         emailValue,
@@ -83,7 +86,7 @@ module.exports = async function handler(req, res) {
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "Leads!A:G",
+      range: "Leads!A:E",
       valueInputOption: "RAW",
       insertDataOption: "INSERT_ROWS",
       requestBody: {
