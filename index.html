@@ -58,6 +58,12 @@
             nền tảng AI BFSI</span>
         </div>
         <div class="count" id="count" aria-label="Đếm ngược đến ngày hội nghị"></div>
+        <div class="stage-marquee">
+          <div class="stage-marquee-track">
+            <span>Luận đàm chiến lược cấp C-level - Khám phá cách Agentic AI thế hệ mới - Tiếp cận nền tảng hợp nhất AI và dữ liệu - Bước vào không gian Phygital Banking - Kết nối năng lực triển khai - Gặp gỡ chuyên gia đầu ngành</span>
+            <span aria-hidden="true">Luận đàm chiến lược cấp C-level - Khám phá cách Agentic AI thế hệ mới - Tiếp cận nền tảng hợp nhất AI và dữ liệu - Bước vào không gian Phygital Banking - Kết nối năng lực triển khai - Gặp gỡ chuyên gia đầu ngành</span>
+          </div>
+        </div>
         <a class="cta" href="#pass">Nhận thẻ mời cá nhân</a>
       </div>
       <div class="scene" aria-hidden="true">
@@ -186,6 +192,9 @@
       submitBtn.disabled = false;
       submitBtn.textContent = originalButtonText;
       document.getElementById("acts").classList.remove("hide");
+      if (window.matchMedia("(max-width: 820px)").matches) {
+        document.getElementById("card").scrollIntoView({ behavior: "smooth", block: "center" });
+      }
 
       // try {
       //   const formData = Object.fromEntries(
