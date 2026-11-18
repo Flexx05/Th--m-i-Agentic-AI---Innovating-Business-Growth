@@ -14,8 +14,8 @@
 
 <body>
   <audio id="backgroundMusic" src="asset/music/nhẹ nhàng mở màn.mp3" autoplay loop preload="auto"></audio>
-  <button class="music-toggle" id="musicToggle" type="button" aria-label="Bật nhạc nền"
-    aria-pressed="false" title="Bật nhạc nền">♫</button>
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Bật nhạc nền" aria-pressed="false"
+    title="Bật nhạc nền">♫</button>
   <div id="desktopCarousel">
     <header class="hero carousel-slide is-active intro-pending" aria-label="Giới thiệu sự kiện">
       <div class="hero-intro-backdrop" aria-hidden="true"></div>
@@ -30,27 +30,35 @@
         <div class="title" id="title">
           <img src="asset/image/text.webp" width="75%" alt="">
           <br />
-          <a class="cta" href="#event-info">Khám phá</a>
+          <a class="cta" href="#event-info">KHÁM PHÁ TẠI ĐÂY</a>
         </div>
       </div>
     </header>
 
     <section class="event-info carousel-slide" id="event-info" aria-label="Thời gian, địa điểm và lịch trình">
-      <img class="event-info-logo" src="asset/image/logo.webp" alt="VNPT">
       <div class="event-info-location">
         <img class="event-info-location-image" src="asset/image/diadiem.webp"
           alt="13:00, thứ Ba ngày 01/12/2026, tại Khách sạn Tân Sơn Nhất, 200–202 Hoàng Văn Thụ, TP. Hồ Chí Minh">
-        <img class="event-info-rubix" src="asset/image/rubix.webp" alt="">
+        <div class="event-info-cube scene" aria-hidden="true">
+          <div class="cube">
+            <div class="f">Luận đàm chiến lược cấp C-level</div>
+            <div class="f">Khám phá cách Agentic AI thế hệ mới</div>
+            <div class="f">Tiếp cận nền tảng hợp nhất AI và dữ liệu</div>
+            <div class="f">Bước vào không gian Phygital Banking</div>
+            <div class="f">Kết nối năng lực triển khai</div>
+            <div class="f"><span>Gặp gỡ chuyên gia đầu ngành</span></div>
+          </div>
+        </div>
       </div>
       <div class="event-info-timeline">
         <img class="event-info-agenda" src="asset/image/agenda.webp" alt="Agenda">
         <img class="event-info-time" src="asset/image/timeline.webp"
           alt="Lịch trình hội thảo: 13:30 đón khách, 14:00 khai mạc, các phiên chia sẻ và showcase, 16:30 VIP Dinner">
       </div>
-      <a class="cta event-info-cta" href="#stage">Tổng quan hội thảo</a>
+      <a class="cta event-info-cta" href="#pass">NHẬN THƯ MỜI TẠI ĐÂY</a>
     </section>
 
-    <section class="stage carousel-slide" id="stage" aria-label="Tổng quan hội thảo">
+    <!-- <section class="stage carousel-slide" id="stage" aria-label="Tổng quan hội thảo">
       <div>
         <h2>Từ trợ lý trả lời đến tác nhân tự hành động</h2>
         <p class="sub">Một ngày để xem AI agent đang thay đổi cách doanh nghiệp vận hành, chăm sóc khách hàng và tăng
@@ -59,14 +67,17 @@
             công nghệ</span><span>Gặp gỡ chuyên gia đầu ngành</span><span>Kết nối năng lực triển khai</span><span>Ra mắt
             nền tảng AI BFSI</span>
         </div>
-        <div class="count" id="count" aria-label="Đếm ngược đến ngày hội nghị"></div>
         <div class="stage-marquee">
           <div class="stage-marquee-track">
-            <span>Luận đàm chiến lược cấp C-level - Khám phá cách Agentic AI thế hệ mới - Tiếp cận nền tảng hợp nhất AI và dữ liệu - Bước vào không gian Phygital Banking - Kết nối năng lực triển khai - Gặp gỡ chuyên gia đầu ngành</span>
-            <span aria-hidden="true">Luận đàm chiến lược cấp C-level - Khám phá cách Agentic AI thế hệ mới - Tiếp cận nền tảng hợp nhất AI và dữ liệu - Bước vào không gian Phygital Banking - Kết nối năng lực triển khai - Gặp gỡ chuyên gia đầu ngành</span>
+            <span>Luận đàm chiến lược cấp C-level - Khám phá cách Agentic AI thế hệ mới - Tiếp cận nền tảng hợp nhất AI
+              và dữ liệu - Bước vào không gian Phygital Banking - Kết nối năng lực triển khai - Gặp gỡ chuyên gia đầu
+              ngành</span>
+            <span aria-hidden="true">Luận đàm chiến lược cấp C-level - Khám phá cách Agentic AI thế hệ mới - Tiếp cận
+              nền tảng hợp nhất AI và dữ liệu - Bước vào không gian Phygital Banking - Kết nối năng lực triển khai - Gặp
+              gỡ chuyên gia đầu ngành</span>
           </div>
         </div>
-        <a class="cta" href="#pass">Nhận thẻ mời cá nhân</a>
+        <a class="cta" href="#pass">NHẬN THƯ MỜI TẠI ĐÂY</a>
       </div>
       <div class="scene" aria-hidden="true">
         <div class="cube">
@@ -75,31 +86,32 @@
           <div class="f">Tiếp cận nền tảng hợp nhất AI và dữ liệu</div>
           <div class="f">Bước vào không gian Phygital Banking</div>
           <div class="f">Kết nối năng lực triển khai</div>
-          <div class="f">Gặp gỡ chuyên gia đầu ngành</div>
+          <div class="f"><span>Gặp gỡ chuyên gia đầu ngành</span></div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <section class="make carousel-slide" id="pass" aria-label="Nhập thông tin tạo thẻ mời">
       <div class="make-form-content">
-        <h2>Tạo thẻ mời của riêng bạn</h2>
-        <p class="sub">Nhập tên để Agent phát hành thẻ tham dự cá nhân hóa. Bạn có thể xác nhận tham dự và lưu vào lịch
-          ngay.</p>
+        <h2>Tạo thẻ mời của quý vị</h2>
+        <p class="sub">Nhập thông tin để VPNT SmartBot phát hành thư mời tham dự hội thảo. Quý khách có thể tải thư mời
+          và lưu lịch hẹn trên Google Calendar</p>
         <form id="f">
-          <input id="name" name="fullName" placeholder="Họ và tên của bạn" autocomplete="name" aria-label="Họ và tên"
+          <input id="name" name="fullName" placeholder="Họ và tên" autocomplete="name" aria-label="Họ và tên"
             minlength="2" maxlength="100" required />
-          <input id="phone" name="phone" type="tel" placeholder="Số điện thoại của bạn" autocomplete="tel"
+          <input id="phone" name="phone" type="tel" placeholder="Số điện thoại" autocomplete="tel"
             aria-label="Số điện thoại" minlength="8" maxlength="20" required />
-          <input id="email" name="email" placeholder="Email của bạn" required autocomplete="email" aria-label="Email"
+          <input id="email" name="email" placeholder="Email" required autocomplete="email" aria-label="Email"
             maxlength="254" type="email" />
           <input id="company" name="company" required placeholder="Công ty" autocomplete="organization"
             aria-label="Công ty" maxlength="100" />
           <input id="position" name="position" required placeholder="Chức vụ" autocomplete="organization"
             aria-label="Chức vụ" maxlength="100" />
           <input name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" hidden />
-          <button class="cta" style="margin:0; min-width: full;" type="submit" id="submitBtn">Phát hành
-            thẻ</button>
+          <button class="cta" style="margin:0;" type="submit" id="submitBtn">PHÁT HÀNH THƯ MỜI TẠI
+            ĐÂY</button>
         </form>
+        <div class="count make-count" id="count" aria-label="Đếm ngược đến ngày hội nghị"></div>
         <p id="formMessage" role="status"></p>
       </div>
     </section>
@@ -117,16 +129,14 @@
         </div>
       </div>
       <div class="acts hide" id="acts">
-        <p id="st">Chờ xác nhận</p>
-        <button class="cta" id="ok" type="button">Xác nhận tham dự</button>
+        <button class="cta" id="ok" type="button">TẢI THƯ MỜI</button>
         <a class="cta ghost" target="_blank" rel="noopener"
           href="https://calendar.google.com/calendar/u/0/r/eventedit?text=Agentic+AI+-+Innovating+Business+Growth&dates=20261201/20261202&location=Kh%C3%A1ch+s%E1%BA%A1n+T%C3%A2n+S%C6%A1n+Nh%E1%BA%A5t,+TP.+H%E1%BB%93+Ch%C3%AD+Minh&details=H%E1%BB%99i%20ngh%E1%BB%8B%20VNPT%20AI:%20Agentic%20AI%20-%20Innovating%20Business%20Growth">
-          Lưu vào lịch</a>
-        <a class="cta ghost" href="#pass">Quay lại biểu mẫu</a>
+          LƯU VÀO GOOGLE CALENDAR</a>
       </div>
     </section>
 
-    <div class="carousel-slide final-slide" id="final-slide" aria-label="Kết thúc thư mời">
+    <!-- <div class="carousel-slide final-slide" id="final-slide" aria-label="Kết thúc thư mời">
       <section class="venue">
         <h2>Hẹn gặp Quý vị tại Tân Sơn Nhất</h2>
         <p class="sub">Ngày 01 tháng 12 năm 2026, 202 Đ. Hoàng Văn Thụ, Đức Nhuận, Hồ Chí Minh. Lịch trình chi tiết và
@@ -137,7 +147,7 @@
         Growth ·
         01/12/2026
       </footer>
-    </div>
+    </div> -->
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -145,6 +155,8 @@
     (function () {
       var music = document.getElementById('backgroundMusic');
       var musicButton = document.getElementById('musicToggle');
+
+      music.volume = 0.2; // Âm lượng 20%
       function syncMusicButton() {
         var isPlaying = !music.paused;
         var label = isPlaying ? 'Tắt nhạc nền' : 'Bật nhạc nền';
@@ -172,9 +184,9 @@
         });
       });
 
-      var msg = "Xin chào! Tôi là trợ lý cá nhân VNPT SmartBot của Quý khách.\nKỷ nguyên Agentic AI đang mở ra những cơ hội mới, nơi AI không chỉ hỗ trợ mà còn chủ động thực thi, tối ưu vận hành và thúc đẩy tăng trưởng kinh doanh.\nNgày 01/12/2026, VNPT AI trân trọng mời Quý khách tham dự VNPT AI Tech Updates 2026 tại Khách sạn Tân Sơn Nhất, TP.HCM.\nĐây sẽ là dịp để cùng các nhà lãnh đạo và chuyên gia công nghệ khám phá cách Agentic AI chuyển hóa tiềm năng công nghệ thành giá trị kinh doanh thực tiễn.\nQuý khách đã sẵn sàng khám phá tương lai cùng VNPT AI?";
+      var msg = "Xin kính chào Quý khách! Tôi là VNPT SmartBot, trợ lý AI đồng hành cùng Quý vị tại VNPT AI TECH UPDATES 2026.\nKỷ nguyên Agentic AI đang mở ra những phương thức mới trong điều hành, tối ưu vận hành và thúc đẩy tăng trưởng kinh doanh.\nKính mời Quý khách cùng VNPT AI khám phá những năng lực công nghệ đang định hình tương lai ngành tài chính – ngân hàng.";
       var el = document.getElementById('type'), t = document.getElementById('title'), i = 0;
-      function go() { el.textContent = msg.slice(0, ++i); if (i < msg.length) setTimeout(go, 28); else t.classList.add('on') }
+      function go() { el.textContent = msg.slice(0, ++i); if (i < msg.length) setTimeout(go, 10); else t.classList.add('on') }
       var hero = document.querySelector('.hero');
       var reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
       function revealAgent() {
@@ -284,8 +296,6 @@
       const carousel = document.getElementById("desktopCarousel");
       const slides = Array.from(carousel.children);
       const desktopQuery = window.matchMedia("(min-width: 821px)");
-      const confirmButton = carousel.querySelector("#ok");
-      const finalSlide = carousel.querySelector("#final-slide");
       let activeIndex = 0;
       let touchStart = null;
 
@@ -305,15 +315,6 @@
         if (targetIndex >= 0) showSlide(targetIndex);
       });
 
-      confirmButton.addEventListener("click", function () {
-        this.textContent = "Đã xác nhận";
-        this.disabled = true;
-        carousel.querySelector("#st").textContent = "Đã xác nhận ✓";
-
-        window.setTimeout(function () {
-          showSlide(slides.indexOf(finalSlide));
-        }, 1000);
-      });
 
       Array.from(carousel.querySelectorAll('a[href^="#"]')).forEach(function (link) {
         link.addEventListener("click", function (event) {
