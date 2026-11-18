@@ -13,7 +13,9 @@
 </head>
 
 <body>
-  <audio src="asset/music/nhẹ nhàng mở màn.mp3" autoplay loop></audio>
+  <audio id="backgroundMusic" src="asset/music/nhẹ nhàng mở màn.mp3" autoplay loop preload="auto"></audio>
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Bật nhạc nền"
+    aria-pressed="false" title="Bật nhạc nền">♫</button>
   <div id="desktopCarousel">
     <header class="hero carousel-slide is-active intro-pending" aria-label="Giới thiệu sự kiện">
       <div class="hero-intro-backdrop" aria-hidden="true"></div>
@@ -139,6 +141,35 @@
   <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script>
     (function () {
+      var music = document.getElementById('backgroundMusic');
+      var musicButton = document.getElementById('musicToggle');
+      function syncMusicButton() {
+        var isPlaying = !music.paused;
+        var label = isPlaying ? 'Tắt nhạc nền' : 'Bật nhạc nền';
+        musicButton.setAttribute('aria-pressed', String(isPlaying));
+        musicButton.setAttribute('aria-label', label);
+        musicButton.title = label;
+      }
+      music.addEventListener('play', syncMusicButton);
+      music.addEventListener('pause', syncMusicButton);
+      syncMusicButton();
+      music.play().catch(function (error) {
+        syncMusicButton();
+        if (error.name !== 'NotAllowedError') {
+          console.error('Không thể tự động phát nhạc nền.', error);
+        }
+      });
+      musicButton.addEventListener('click', function () {
+        if (!music.paused) {
+          music.pause();
+          return;
+        }
+        music.play().catch(function (error) {
+          syncMusicButton();
+          console.error('Không thể phát nhạc nền.', error);
+        });
+      });
+
       var msg = "Xin chào! Tôi là trợ lý cá nhân VNPT SmartBot của Quý khách.\nKỷ nguyên Agentic AI đang mở ra những cơ hội mới, nơi AI không chỉ hỗ trợ mà còn chủ động thực thi, tối ưu vận hành và thúc đẩy tăng trưởng kinh doanh.\nNgày 01/12/2026, VNPT AI trân trọng mời Quý khách tham dự VNPT AI Tech Updates 2026 tại Khách sạn Tân Sơn Nhất, TP.HCM.\nĐây sẽ là dịp để cùng các nhà lãnh đạo và chuyên gia công nghệ khám phá cách Agentic AI chuyển hóa tiềm năng công nghệ thành giá trị kinh doanh thực tiễn.\nQuý khách đã sẵn sàng khám phá tương lai cùng VNPT AI?";
       var el = document.getElementById('type'), t = document.getElementById('title'), i = 0;
       function go() { el.textContent = msg.slice(0, ++i); if (i < msg.length) setTimeout(go, 28); else t.classList.add('on') }
