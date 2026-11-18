@@ -196,6 +196,11 @@ body {
   min-height: 150px;
 }
 
+#type {
+  display: block;
+  text-align: justify;
+}
+
 .who {
   display: flex;
   align-items: center;
@@ -221,7 +226,7 @@ body {
   }
 }
 
-.caret {
+#type::after {
   display: inline-block;
   width: 2px;
   height: 1.1em;
