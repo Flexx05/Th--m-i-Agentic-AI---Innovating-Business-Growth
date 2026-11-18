@@ -13,6 +13,7 @@
 </head>
 
 <body>
+  <audio src="asset/music/nhẹ nhàng mở màn.mp3" autoplay loop></audio>
   <div id="desktopCarousel">
     <header class="hero carousel-slide is-active intro-pending" aria-label="Giới thiệu sự kiện">
       <div class="hero-intro-backdrop" aria-hidden="true"></div>
@@ -21,24 +22,27 @@
       </div>
       <div class="agent">
         <div class="chat" aria-live="polite">
-          <div class="who"><span class="dot"></span>Agent VNPT đang soạn thư mời dành riêng cho bạn…</div>
+          <div class="who"><span class="dot"></span>VNPT AI Agent đang chuẩn bị thư mời dành riêng cho Quý khách…</div>
           <span id="type"></span><span class="caret"></span>
         </div>
         <div class="title" id="title">
           <img src="asset/image/text.webp" width="75%" alt="">
           <br />
-          <a class="cta" href="#event-info">Chi tiết chương trình</a>
+          <a class="cta" href="#event-info">Khám phá</a>
         </div>
       </div>
     </header>
 
     <section class="event-info carousel-slide" id="event-info" aria-label="Thời gian, địa điểm và lịch trình">
+      <img class="event-info-logo" src="asset/image/logo.webp" alt="VNPT">
       <div class="event-info-location">
-        <img src="asset/image/diadiem.webp"
+        <img class="event-info-location-image" src="asset/image/diadiem.webp"
           alt="13:00, thứ Ba ngày 01/12/2026, tại Khách sạn Tân Sơn Nhất, 200–202 Hoàng Văn Thụ, TP. Hồ Chí Minh">
+        <img class="event-info-rubix" src="asset/image/rubix.webp" alt="">
       </div>
       <div class="event-info-timeline">
-        <img src="asset/image/time.webp"
+        <img class="event-info-agenda" src="asset/image/agenda.webp" alt="Agenda">
+        <img class="event-info-time" src="asset/image/timeline.webp"
           alt="Lịch trình hội thảo: 13:30 đón khách, 14:00 khai mạc, các phiên chia sẻ và showcase, 16:30 VIP Dinner">
       </div>
       <a class="cta event-info-cta" href="#stage">Tổng quan hội thảo</a>
@@ -58,12 +62,12 @@
       </div>
       <div class="scene" aria-hidden="true">
         <div class="cube">
-          <div class="f">Đối thoại chiến lược</div>
-          <div class="f">Chia sẻ kinh nghiệm điều hành</div>
-          <div class="f">Trải nghiệm công nghệ</div>
-          <div class="f">Gặp gỡ chuyên gia đầu ngành</div>
+          <div class="f">Luận đàm chiến lược cấp C-level</div>
+          <div class="f">Khám phá cách Agentic AI thế hệ mới </div>
+          <div class="f">Tiếp cận nền tảng hợp nhất AI và dữ liệu</div>
+          <div class="f">Bước vào không gian Phygital Banking</div>
           <div class="f">Kết nối năng lực triển khai</div>
-          <div class="f">Ra mắt nền tảng AI BFSI</div>
+          <div class="f">Gặp gỡ chuyên gia đầu ngành</div>
         </div>
       </div>
     </section>
@@ -96,7 +100,7 @@
             alt="Thư mời hội thảo Agentic AI – Innovating Business Growth, ngày 01/12/2026" />
           <div class="invite-greeting">
             <div>
-              <span class="invite-label">Kính mời:</span>
+              <span class="invite-label">Kính mời quý khách:</span>
               <strong class="invite-name" id="who">.........................</strong>
             </div>
             <span class="invite-note">đến tham dự Hội thảo</span>
@@ -106,33 +110,30 @@
           <p id="st">Chờ xác nhận</p>
           <button class="cta" id="ok" type="button">Xác nhận tham dự</button>
           <a class="cta ghost" target="_blank" rel="noopener"
-            href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Agentic%20AI%20-%20Innovating%20Business%20Growth&dates=20261201/20261202&location=Kh%C3%A1ch%20s%E1%BA%A1n%20T%C3%A2n%20S%C6%A1n%20Nh%E1%BA%A5t%2C%20TP.%20H%E1%BB%93%20Ch%C3%AD%20Minh&details=H%E1%BB%99i%20ngh%E1%BB%8B%20VNPT">Lưu
-            vào lịch</a>
+            href="https://calendar.google.com/calendar/u/0/r/eventedit?text=Agentic+AI+-+Innovating+Business+Growth&dates=20261201/20261202&location=Kh%C3%A1ch+s%E1%BA%A1n+T%C3%A2n+S%C6%A1n+Nh%E1%BA%A5t,+TP.+H%E1%BB%93+Ch%C3%AD+Minh&details=H%E1%BB%99i%20ngh%E1%BB%8B%20VNPT%20AI:%20Agentic%20AI%20-%20Innovating%20Business%20Growth">
+            Lưu vào lịch</a>
         </div>
       </div>
     </section>
 
     <div class="carousel-slide final-slide" id="final-slide" aria-label="Kết thúc thư mời">
       <section class="venue">
-        <h2>Hẹn gặp bạn tại Tân Sơn Nhất</h2>
-        <p class="sub">Ngày 01 tháng 12 năm 2026, Thành phố Hồ Chí Minh. Lịch trình chi tiết và liên kết tham dự trực
-          tuyến
-          sẽ được gửi đến bạn sau khi xác nhận.</p>
-        <div class="addr"><b>Khách sạn Tân Sơn Nhất</b>Thành phố Hồ Chí Minh</div>
+        <h2>Hẹn gặp Quý vị tại Tân Sơn Nhất</h2>
+        <p class="sub">Ngày 01 tháng 12 năm 2026, 202 Đ. Hoàng Văn Thụ, Đức Nhuận, Hồ Chí Minh. Lịch trình chi tiết và
+          liên kết tham dự trực tuyến sẽ được gửi đến bạn sau khi xác nhận.</p>
+        <div class="addr"><b>Khách sạn Tân Sơn Nhất</b> 202 Đ. Hoàng Văn Thụ, Đức Nhuận, Hồ Chí Minh</div>
       </section>
-      <footer><strong>VNPT</strong><br>Agentic AI · Innovating Business Growth · 01/12/2026</footer>
+      <footer><img src="asset/image/logo.webp" alt="VNPT" style="width: 10%;"><br>Agentic AI · Innovating Business
+        Growth ·
+        01/12/2026
+      </footer>
     </div>
   </div>
-  <!-- Tạm ẩn các nút chuyển section.
-  <button class="carousel-arrow prev" type="button" aria-label="Thành phần trước"
-    aria-controls="desktopCarousel">‹</button>
-  <button class="carousel-arrow next" type="button" aria-label="Thành phần tiếp theo"
-    aria-controls="desktopCarousel">›</button>
-  -->
+
   <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script>
     (function () {
-      var msg = "Xin chào. Tôi là Agent của VNPT. Tôi đã phân tích xu hướng và có một tin quan trọng: ngày 1/12/2026, tại Khách sạn Tân Sơn Nhất, chúng ta cùng thảo luận cách AI agent tạo ra tăng trưởng cho doanh nghiệp. Bạn có muốn tham gia không?";
+      var msg = "Xin chào! Tôi là trợ lý cá nhân VNPT SmartBot của Quý khách.\nKỷ nguyên Agentic AI đang mở ra những cơ hội mới, nơi AI không chỉ hỗ trợ mà còn chủ động thực thi, tối ưu vận hành và thúc đẩy tăng trưởng kinh doanh.\nNgày 01/12/2026, VNPT AI trân trọng mời Quý khách tham dự VNPT AI Tech Updates 2026 tại Khách sạn Tân Sơn Nhất, TP.HCM.\nĐây sẽ là dịp để cùng các nhà lãnh đạo và chuyên gia công nghệ khám phá cách Agentic AI chuyển hóa tiềm năng công nghệ thành giá trị kinh doanh thực tiễn.\nQuý khách đã sẵn sàng khám phá tương lai cùng VNPT AI?";
       var el = document.getElementById('type'), t = document.getElementById('title'), i = 0;
       function go() { el.textContent = msg.slice(0, ++i); if (i < msg.length) setTimeout(go, 28); else t.classList.add('on') }
       var hero = document.querySelector('.hero');
@@ -181,7 +182,7 @@
       const originalButtonText = submitBtn.textContent;
       submitBtn.disabled = true;
       submitBtn.textContent = "Đang phát hành...";
-      document.getElementById("who").textContent = formData.fullName;
+      document.getElementById("who").textContent = formData.fullName.toLocaleUpperCase();
       submitBtn.disabled = false;
       submitBtn.textContent = originalButtonText;
       document.getElementById("acts").classList.remove("hide");

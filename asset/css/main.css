@@ -315,32 +315,35 @@ h2 {
   pointer-events: none;
 }
 
+.event-info-logo {
+  position: absolute;
+  top: clamp(20px, 4vh, 40px);
+  right: clamp(24px, 6vw, 88px);
+  z-index: 0;
+  display: block;
+  width: clamp(110px, 14vw, 190px);
+  max-height: 80px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
 .event-info-location,
 .event-info-timeline {
   position: absolute;
   z-index: 1;
   margin: 0;
-  opacity: 0;
-  filter: blur(8px);
-  will-change: opacity, transform, filter;
-  transition:
-    opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1.15s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .event-info-location {
   top: clamp(32px, 6vh, 68px);
   left: clamp(24px, 6vw, 88px);
   width: min(38vw, 520px);
-  transform: translateX(-72px);
 }
 
 .event-info-timeline {
   right: clamp(24px, 6vw, 88px);
   bottom: clamp(24px, 5vh, 48px);
   width: min(45vw, 660px);
-  transform: translateX(72px);
 }
 
 .event-info-location img,
@@ -349,26 +352,76 @@ h2 {
   width: 100%;
   height: auto;
   object-fit: contain;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(18px) scale(0.985);
+  will-change: opacity, transform, filter;
+  transition:
+    opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.event-info-location .event-info-location-image {
+  transform: translateX(-38px);
+}
+
+.event-info-timeline .event-info-agenda,
+.event-info-timeline .event-info-time {
+  transform: translateX(38px);
+}
+
+.event-info-location .event-info-rubix {
+  transform: translateY(20px) scale(0.97);
 }
 
 .event-info-timeline img {
-  max-height: 78svh;
+  max-height: 68svh;
   object-position: right bottom;
 }
 
-.event-info.is-active .event-info-location,
-.event-info.is-visible .event-info-location {
-  opacity: 1;
-  filter: blur(0);
-  transform: translateX(0);
+.event-info-location .event-info-rubix {
+  width: min(40vw, 460px);
+  max-width: 100%;
+  margin-top: clamp(8px, 1vh, 14px);
 }
 
-.event-info.is-active .event-info-timeline,
-.event-info.is-visible .event-info-timeline {
+.event-info-timeline .event-info-agenda {
+  width: min(55%, 430px);
+  margin: 0 50px clamp(8px, 1vh, 14px) auto;
+}
+
+.event-info.is-active .event-info-rubix,
+.event-info.is-visible .event-info-rubix,
+.event-info.is-active .event-info-location-image,
+.event-info.is-visible .event-info-location-image,
+.event-info.is-active .event-info-agenda,
+.event-info.is-visible .event-info-agenda,
+.event-info.is-active .event-info-time,
+.event-info.is-visible .event-info-time {
   opacity: 1;
   filter: blur(0);
-  transform: translateX(0);
-  transition-delay: 0.16s;
+  transform: translate(0) scale(1);
+}
+
+.event-info.is-active .event-info-rubix,
+.event-info.is-visible .event-info-rubix {
+  transition-delay: 0.65s;
+}
+
+.event-info.is-active .event-info-location-image,
+.event-info.is-visible .event-info-location-image {
+  transition-delay: 1.3s;
+}
+
+.event-info.is-active .event-info-agenda,
+.event-info.is-visible .event-info-agenda {
+  transition-delay: 1.95s;
+}
+
+.event-info.is-active .event-info-time,
+.event-info.is-visible .event-info-time {
+  transition-delay: 2.6s;
 }
 
 .event-info-cta {
@@ -571,7 +624,7 @@ input:focus-visible {
   z-index: 1;
   top: 12.5%;
   left: 5.6%;
-  width: 43%;
+  width: 70%;
   color: #f4fbff;
   font-size: 18px;
   font-size: clamp(9px, 2.35cqw, 18px);
@@ -593,6 +646,7 @@ input:focus-visible {
 .invite-greeting .invite-note {
   display: block;
   font-style: italic;
+  line-height: 40px;
 }
 
 .acts {
@@ -837,6 +891,13 @@ footer strong {
     padding: clamp(32px, 8vw, 56px) clamp(20px, 5vw, 36px);
   }
 
+  .event-info-logo {
+    top: 16px;
+    right: 16px;
+    width: clamp(96px, 30vw, 140px);
+    max-height: 56px;
+  }
+
   .event-info-location,
   .event-info-timeline {
     position: relative;
@@ -854,6 +915,19 @@ footer strong {
 
   .event-info-timeline img {
     max-height: none;
+  }
+
+  .event-info-location .event-info-rubix,
+  .event-info-timeline .event-info-agenda {
+    display: none;
+  }
+
+  .event-info.is-visible .event-info-location-image {
+    transition-delay: 0s;
+  }
+
+  .event-info.is-visible .event-info-time {
+    transition-delay: 0.65s;
   }
 
   .event-info-cta {
