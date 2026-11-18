@@ -1045,6 +1045,7 @@ footer strong {
 
   .title {
     margin-top: clamp(8px, 2vh, 14px);
+    text-align: center;
   }
 
   .title img {
@@ -1053,10 +1054,18 @@ footer strong {
     object-fit: contain;
   }
 
+  .cta {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
   .title .cta {
     margin-top: clamp(8px, 1.5vh, 12px);
     padding: 9px 18px;
     font-size: 14px;
+    text-align: center;
   }
 
   .stage,
@@ -1092,6 +1101,12 @@ footer strong {
   .stage .count span {
     font-size: clamp(9px, 2.7vw, 11px);
     white-space: nowrap;
+  }
+
+  .stage > div > .cta {
+    display: block;
+    margin-inline: auto;
+    text-align: center;
   }
 
   .stage-marquee {
@@ -1166,7 +1181,8 @@ footer strong {
   .event-info-cta {
     position: relative;
     inset: auto;
-    align-self: flex-start;
+    align-self: center;
+    text-align: center;
   }
 
   .agent {
