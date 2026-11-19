@@ -1287,6 +1287,11 @@ footer strong {
     grid-template-columns: 1fr;
   }
 
+  .make-form-content h2 {
+    max-width: none;
+    font-size: clamp(18px, 5.7vw, 28px);
+  }
+
   .invitation-slide {
     padding: clamp(20px, 5vh, 36px) clamp(20px, 6vw, 32px);
   }
