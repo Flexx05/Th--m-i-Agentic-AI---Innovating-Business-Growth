@@ -1279,11 +1279,17 @@ footer strong {
     width: 100%;
     max-width: 100%;
     margin-inline: auto;
+    text-align: center;
   }
 
   .stage,
   .make {
     grid-template-columns: 1fr;
+  }
+
+  .make-form-content h2 {
+    max-width: none;
+    font-size: clamp(18px, 5.7vw, 28px);
   }
 
   .invitation-slide {
