@@ -676,10 +676,10 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: clamp(16px, 3vh, 28px);
+  justify-content: safe center;
+  gap: clamp(12px, 2vh, 20px);
   background: var(--deep);
-  padding: clamp(24px, 6vh, 64px) clamp(20px, 6vw, 90px);
+  padding: clamp(16px, 2.5vh, 28px) clamp(20px, 6vw, 90px);
 }
 
 form {
@@ -705,6 +705,7 @@ input:focus-visible {
 
 .pass {
   position: relative;
+  flex: 0 0 auto;
   width: min(80%, 768px);
   container-type: inline-size;
   margin-inline: auto;
@@ -757,11 +758,12 @@ input:focus-visible {
 
 .acts {
   display: flex;
+  flex: 0 0 auto;
   justify-content: center;
   gap: 12px;
   flex-wrap: nowrap;
   width: min(80%, 768px);
-  margin: 18px auto 0;
+  margin: 0 auto;
 }
 
 .acts .cta {
@@ -931,22 +933,22 @@ footer strong {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
-    gap: clamp(6px, 1vh, 12px);
-    padding: 0 clamp(12px, 2vw, 32px) clamp(76px, 8vh, 96px);
+    justify-content: center;
+    gap: clamp(10px, 1.8vh, 18px);
+    padding: 0 clamp(12px, 2vw, 32px) clamp(56px, 6vh, 72px);
   }
 
   .event-info-timeline .event-info-agenda {
-    width: min(52%, 390px);
-    max-height: 18vh;
-    margin: clamp(12px, 2vh, 24px) auto 0;
+    width: min(50%, 380px);
+    max-height: 14vh;
+    margin: clamp(4px, 1vh, 12px) auto 0;
     align-self: center;
   }
 
   .event-info-timeline .event-info-time {
-    width: min(86%, 620px);
-    max-height: 54vh;
-    margin: 0 auto clamp(4px, 1vh, 10px);
+    width: min(92%, 680px);
+    max-height: 66vh;
+    margin: 0 auto;
     align-self: center;
   }
 
@@ -1002,11 +1004,11 @@ footer strong {
   }
 
   .invitation-slide .pass {
-    width: min(80%, 768px, calc((100svh - 180px) * 0.6667));
+    width: min(88%, 768px, calc((100svh - 130px) * 0.6661));
   }
 
   .invitation-slide .acts {
-    width: min(80%, 768px, calc((100svh - 180px) * 0.6667));
+    width: min(88%, 768px, calc((100svh - 130px) * 0.6661));
   }
 
   #desktopCarousel > .final-slide {
@@ -1345,9 +1347,9 @@ footer strong {
   .event-info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: clamp(24px, 5vh, 40px);
-    padding: clamp(32px, 8vw, 56px) clamp(20px, 5vw, 36px);
+    justify-content: flex-start;
+    gap: clamp(20px, 4vh, 32px);
+    padding: clamp(24px, 6vw, 44px) clamp(20px, 5vw, 36px);
   }
 
   .event-info-logo {
@@ -1366,6 +1368,7 @@ footer strong {
 
   .event-info-location {
     align-self: flex-start;
+    margin-top: auto;
   }
 
   .event-info-timeline {
@@ -1393,6 +1396,7 @@ footer strong {
     position: relative;
     inset: auto;
     align-self: center;
+    margin-bottom: auto;
     text-align: center;
   }
 
@@ -1413,18 +1417,18 @@ footer strong {
   }
 
   .pass {
-    width: min(100%, calc((100svh - 190px) * 0.6667), 768px);
+    width: min(100%, calc((100svh - 120px) * 0.6661), 768px);
   }
 
   .invitation-slide {
-    justify-content: center;
-    gap: clamp(10px, 2vh, 18px);
-    padding: clamp(12px, 3vh, 24px) 12px
+    justify-content: safe center;
+    gap: clamp(10px, 2vh, 16px);
+    padding: clamp(12px, 2vh, 20px) 12px
       max(12px, env(safe-area-inset-bottom, 0px));
   }
 
   .invitation-slide .pass {
-    width: min(100%, calc((100svh - 190px) * 0.6667));
+    width: min(100%, calc((100svh - 120px) * 0.6661));
   }
 
   .invitation-slide .acts {

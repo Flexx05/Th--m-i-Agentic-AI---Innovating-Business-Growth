@@ -52,9 +52,9 @@
       <div class="event-info-timeline">
         <img class="event-info-agenda" src="asset/image/agenda.webp" alt="Agenda">
         <img class="event-info-time" src="asset/image/timeline.webp"
-          alt="Lịch trình hội thảo: 13:30 đón khách, 14:00 khai mạc, các phiên chia sẻ và showcase, 16:30 VIP Dinner">
+          alt="Lịch trình hội thảo: 14:00 Opening Ceremony (Biểu diễn nghệ thuật, Phát biểu khai mạc của Lãnh đạo VNPT), 14:30 Session 1 - Strategic Outlook (Xu hướng Chuyển đổi AI trong ngành Tài chính - Ngân hàng), 14:55 Session 2 - Banking Leadership Insights (Từ chiến lược AI đến giá trị kinh doanh thực tiễn), 15:20 Tech Showcase 1: Beyond Conversations: The Agentic CX Era, 15:50 Tea Break, 16:10 Tech Showcase 2: Phygital Banking, Live, 16:45 Bế mạc, 17:00 Executive Networking Dinner (Private Discussion / Lucky Draw)">
       </div>
-      <a class="cta event-info-cta" href="#pass">NHẬN THƯ MỜI TẠI ĐÂY</a>
+      <a class="cta event-info-cta" href="#pass">NHẬN THƯ MỜI</a>
     </section>
 
     <!-- <section class="stage carousel-slide" id="stage" aria-label="Tổng quan hội thảo">
@@ -107,8 +107,7 @@
           <input id="position" name="position" required placeholder="Chức vụ" autocomplete="organization"
             aria-label="Chức vụ" maxlength="100" />
           <input name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" hidden />
-          <button class="cta" style="margin:0;" type="submit" id="submitBtn">PHÁT HÀNH THƯ MỜI TẠI
-            ĐÂY</button>
+          <button class="cta" style="margin:0;" type="submit" id="submitBtn">PHÁT HÀNH THƯ MỜI</button>
         </form>
         <div class="count make-count" id="count" aria-label="Đếm ngược đến ngày hội nghị"></div>
         <p id="formMessage" role="status"></p>
@@ -423,70 +422,68 @@
       const formData = Object.fromEntries(
         new FormData(form).entries()
       );
+      formData.fullName = String(formData.fullName || "").trim();
+      formData.phone = String(formData.phone || "").trim();
+      formData.email = String(formData.email || "").trim();
+      formData.company = String(formData.company || "").trim();
+      formData.position = String(formData.position || "").trim();
 
       const originalButtonText = submitBtn.textContent;
       submitBtn.disabled = true;
       submitBtn.textContent = "Đang phát hành...";
-      document.getElementById("who").textContent = formData.fullName.toLocaleUpperCase();
-      submitBtn.disabled = false;
-      submitBtn.textContent = originalButtonText;
-      document.getElementById("acts").classList.remove("hide");
-      invitationImageBlob = null;
-      downloadButton.disabled = true;
-      const originalDownloadLabel = downloadButton.textContent;
-      downloadButton.textContent = "ĐANG CHUẨN BỊ...";
-      createInvitationImage().then(function (blob) {
-        invitationImageBlob = blob;
-      }).catch(function (error) {
-        downloadMessage.textContent = "Không thể chuẩn bị ảnh thư mời. Vui lòng thử lại bằng nút tải."
-        console.error("Không thể chuẩn bị ảnh thư mời.", error)
-      }).finally(function () {
-        downloadButton.disabled = false;
-        downloadButton.textContent = originalDownloadLabel;
-      });
-      document.dispatchEvent(new CustomEvent("carousel:navigate", { detail: "#invitation-card" }));
+      formMessage.textContent = "";
 
-      // try {
-      //   const formData = Object.fromEntries(
-      //     new FormData(form).entries()
-      //   );
-      //   formData.fullName = String(formData.fullName).trim();
-      //   formData.phone = String(formData.phone).trim();
-      //   formData.email = String(formData.email).trim();
+      try {
+        const response = await fetch("/api/leads", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
 
-      //   const response = await fetch("/api/leads", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(formData),
-      //   });
+        let result = {};
+        try {
+          result = await response.json();
+        } catch {
+          result = {};
+        }
 
-      //   const result = await response.json();
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || "Không thể lưu thông tin đăng ký.");
+        }
 
-      //   if (!response.ok || !result.success) {
-      //     throw new Error(result.message || "Unable to save customer information");
-      //   }
+        document.getElementById("who").textContent = formData.fullName.toLocaleUpperCase();
+        document.getElementById("acts").classList.remove("hide");
+        const card = document.getElementById("card");
+        card.classList.remove("live");
+        void card.offsetWidth;
+        card.classList.add("live");
+        formMessage.textContent = "Gửi thông tin thành công!";
+        form.reset();
 
-      //   document.getElementById("who").textContent = formData.fullName;
-      //   document.getElementById("acts").classList.remove("hide");
-      //   const card = document.getElementById("card");
-      //   card.classList.remove("live");
-      //   void card.offsetWidth;
-      //   card.classList.add("live");
-      //   formMessage.textContent = "Gửi thông tin thành công!";
-      //   form.reset();
+        invitationImageBlob = null;
+        downloadButton.disabled = true;
+        const originalDownloadLabel = downloadButton.textContent;
+        downloadButton.textContent = "ĐANG CHUẨN BỊ...";
+        createInvitationImage().then(function (blob) {
+          invitationImageBlob = blob;
+        }).catch(function (error) {
+          downloadMessage.textContent = "Không thể chuẩn bị ảnh thư mời. Vui lòng thử lại bằng nút tải.";
+          console.error("Không thể chuẩn bị ảnh thư mời.", error);
+        }).finally(function () {
+          downloadButton.disabled = false;
+          downloadButton.textContent = originalDownloadLabel;
+        });
 
-      // } catch (error) {
-      //   // formMessage.textContent = "Không thể gửi thông tin. Vui lòng thử lại.";
-      //   console.error(error);
-
-      // } finally {
-      //   // tạm thời hiển thị tên người đăng ký
-      //   document.getElementById("who").textContent = formData.fullName;
-      //   submitBtn.disabled = false;
-      //   submitBtn.textContent = originalButtonText;
-      // }
+        document.dispatchEvent(new CustomEvent("carousel:navigate", { detail: "#invitation-card" }));
+      } catch (error) {
+        formMessage.textContent = "Không thể gửi thông tin. Vui lòng thử lại.";
+        console.error(error);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalButtonText;
+      }
     });
 
     const handleSubmit = () => {
