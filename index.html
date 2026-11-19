@@ -29,9 +29,8 @@
         </div>
         <div class="title" id="title">
           <img src="asset/image/text.webp" width="75%" alt="">
-          <br />
-          <a class="cta" href="#event-info">KHÁM PHÁ TẠI ĐÂY</a>
         </div>
+        <a class="cta hero-cta" href="#event-info">KHÁM PHÁ TẠI ĐÂY</a>
       </div>
     </header>
 
@@ -133,6 +132,7 @@
         <a class="cta ghost" target="_blank" rel="noopener"
           href="https://calendar.google.com/calendar/u/0/r/eventedit?text=Agentic+AI+-+Innovating+Business+Growth&dates=20261201/20261202&location=Kh%C3%A1ch+s%E1%BA%A1n+T%C3%A2n+S%C6%A1n+Nh%E1%BA%A5t,+TP.+H%E1%BB%93+Ch%C3%AD+Minh&details=H%E1%BB%99i%20ngh%E1%BB%8B%20VNPT%20AI:%20Agentic%20AI%20-%20Innovating%20Business%20Growth">
           LƯU VÀO GOOGLE CALENDAR</a>
+        <span class="visually-hidden" id="downloadMessage" role="status" aria-live="polite"></span>
       </div>
     </section>
 
@@ -186,13 +186,27 @@
 
       var msg = "Xin kính chào Quý khách! Tôi là VNPT SmartBot, trợ lý AI đồng hành cùng Quý vị tại VNPT AI TECH UPDATES 2026.\nKỷ nguyên Agentic AI đang mở ra những phương thức mới trong điều hành, tối ưu vận hành và thúc đẩy tăng trưởng kinh doanh.\nKính mời Quý khách cùng VNPT AI khám phá những năng lực công nghệ đang định hình tương lai ngành tài chính – ngân hàng.";
       var el = document.getElementById('type'), t = document.getElementById('title'), i = 0;
-      function go() { el.textContent = msg.slice(0, ++i); if (i < msg.length) setTimeout(go, 10); else t.classList.add('on') }
+      function go() {
+        el.textContent = msg.slice(0, ++i);
+        if (i < msg.length) {
+          setTimeout(go, 10);
+        } else {
+          t.classList.add('on');
+          hero.classList.add('cta-ready');
+        }
+      }
       var hero = document.querySelector('.hero');
       var reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
       function revealAgent() {
         hero.classList.remove('intro-active', 'intro-pending');
         hero.classList.add('intro-complete');
-        if (reduceMotion) { el.textContent = msg; t.classList.add('on') } else go();
+        if (reduceMotion) {
+          el.textContent = msg;
+          t.classList.add('on');
+          hero.classList.add('cta-ready');
+        } else {
+          go();
+        }
       }
       if (reduceMotion) {
         revealAgent();
@@ -220,6 +234,186 @@
     const form = document.querySelector("#f")
     const formMessage = document.querySelector("#formMessage")
     const submitBtn = document.querySelector("#submitBtn")
+    const downloadButton = document.querySelector("#ok")
+    const downloadMessage = document.querySelector("#downloadMessage")
+    let invitationImageBlob = null
+
+    function getCanvasFont(style, scale) {
+      return [
+        style.fontStyle,
+        style.fontVariant,
+        style.fontWeight,
+        (parseFloat(style.fontSize) * scale) + "px",
+        style.fontFamily
+      ].join(" ")
+    }
+
+    function drawInviteText(context, element, cardRect, scaleX, scaleY, text, maxWidth, wrapText) {
+      const rect = element.getBoundingClientRect()
+      const style = getComputedStyle(element)
+      const fontSize = parseFloat(style.fontSize)
+      const lineHeight = parseFloat(style.lineHeight) || fontSize * 1.3
+      const availableWidth = maxWidth || rect.width
+      const x = (rect.left - cardRect.left) * scaleX
+      const firstBaseline = (rect.top - cardRect.top + (lineHeight - fontSize) / 2 + fontSize * 0.82) * scaleY
+      const maxLineWidth = availableWidth * scaleX
+      const lineHeightPx = lineHeight * scaleY
+
+      context.font = getCanvasFont(style, scaleY)
+      context.fillStyle = style.color
+      context.textBaseline = "alphabetic"
+      if (wrapText === false) {
+        context.fillText(text, x, firstBaseline)
+        return
+      }
+
+      const words = text.split(/\s+/).filter(Boolean)
+      let line = ""
+      let lineIndex = 0
+      function drawLine(value) {
+        context.fillText(value, x, firstBaseline + lineIndex++ * lineHeightPx)
+      }
+
+      words.forEach(function (word) {
+        let remaining = word
+        while (remaining) {
+          const candidate = line ? line + " " + remaining : remaining
+          if (context.measureText(candidate).width <= maxLineWidth) {
+            line = candidate
+            remaining = ""
+          } else if (line) {
+            drawLine(line)
+            line = ""
+          } else {
+            let fittingWord = ""
+            for (const character of Array.from(remaining)) {
+              if (context.measureText(fittingWord + character).width > maxLineWidth && fittingWord) break
+              fittingWord += character
+            }
+            line = fittingWord
+            remaining = remaining.slice(fittingWord.length)
+            if (remaining) drawLine(line)
+            line = ""
+          }
+        }
+      })
+      if (line) drawLine(line)
+    }
+
+    async function createInvitationImage() {
+      const card = document.querySelector("#card")
+      const image = card.querySelector(".invitation-image")
+      const greeting = card.querySelector(".invite-greeting")
+      const label = greeting.querySelector(".invite-label")
+      const name = greeting.querySelector(".invite-name")
+      const note = greeting.querySelector(".invite-note")
+
+      if (!image.complete) {
+        await new Promise(function (resolve, reject) {
+          image.addEventListener("load", resolve, { once: true })
+          image.addEventListener("error", reject, { once: true })
+        })
+      }
+      if (!image.naturalWidth || !image.naturalHeight) {
+        throw new Error("Không thể tải hình nền thư mời.")
+      }
+      if (document.fonts && document.fonts.ready) await document.fonts.ready
+
+      const cardRect = card.getBoundingClientRect()
+      const canvas = document.createElement("canvas")
+      canvas.width = image.naturalWidth
+      canvas.height = image.naturalHeight
+      const context = canvas.getContext("2d")
+      if (!context) throw new Error("Trình duyệt không hỗ trợ tạo ảnh thư mời.")
+      const scaleX = canvas.width / cardRect.width
+      const scaleY = canvas.height / cardRect.height
+      context.drawImage(image, 0, 0, canvas.width, canvas.height)
+
+      const greetingRect = greeting.getBoundingClientRect()
+      const labelRect = label.getBoundingClientRect()
+      const nameRect = name.getBoundingClientRect()
+      drawInviteText(context, label, cardRect, scaleX, scaleY, label.textContent.trim(), labelRect.width, false)
+      drawInviteText(
+        context,
+        name,
+        cardRect,
+        scaleX,
+        scaleY,
+        name.textContent.trim(),
+        Math.max(1, greetingRect.right - nameRect.left)
+      )
+      drawInviteText(context, note, cardRect, scaleX, scaleY, note.textContent.trim(), greetingRect.width)
+
+      return new Promise(function (resolve, reject) {
+        canvas.toBlob(function (blob) {
+          if (blob) resolve(blob)
+          else reject(new Error("Không thể tạo tệp ảnh thư mời."))
+        }, "image/png")
+      })
+    }
+
+    downloadButton.addEventListener("click", async function () {
+      const originalLabel = downloadButton.textContent
+      downloadButton.disabled = true
+      downloadButton.textContent = "ĐANG TẠO ẢNH..."
+      downloadMessage.textContent = ""
+      let fallbackWindow = null
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+      const canShareFiles = isIOS && navigator.canShare && navigator.share &&
+        navigator.canShare({ files: [new File([], "invitation.png", { type: "image/png" })] })
+
+      if (isIOS && !canShareFiles) {
+        fallbackWindow = window.open("", "_blank")
+      }
+
+      let objectUrl = null
+      try {
+        const blob = invitationImageBlob || await createInvitationImage()
+        const fileName = "Thu-moi-Agentic-AI.png"
+        objectUrl = URL.createObjectURL(blob)
+
+        if (canShareFiles) {
+          const file = new File([blob], fileName, { type: "image/png" })
+          await navigator.share({ files: [file], title: "Thư mời Agentic AI" })
+          downloadMessage.textContent = "Đã mở tùy chọn chia sẻ/lưu thư mời."
+          URL.revokeObjectURL(objectUrl)
+          return
+        }
+
+        if (fallbackWindow && !fallbackWindow.closed) {
+          fallbackWindow.location.href = objectUrl
+          downloadMessage.textContent = "Ảnh đã mở ở tab mới. Nhấn giữ ảnh để lưu về thiết bị."
+        } else {
+          const link = document.createElement("a")
+          link.href = objectUrl
+          link.rel = "noopener"
+          if (isIOS) {
+            link.target = "_blank"
+            downloadMessage.textContent = "Ảnh đã mở. Nhấn giữ ảnh để lưu về thiết bị."
+          } else {
+            link.download = fileName
+            downloadMessage.textContent = "Đã tải thư mời về thiết bị."
+          }
+          document.body.appendChild(link)
+          link.click()
+          link.remove()
+        }
+        window.setTimeout(function () { URL.revokeObjectURL(objectUrl) }, 60000)
+      } catch (error) {
+        if (objectUrl) URL.revokeObjectURL(objectUrl)
+        if (fallbackWindow && !fallbackWindow.closed) fallbackWindow.close()
+        if (error.name === "AbortError") {
+          downloadMessage.textContent = "Đã hủy chia sẻ thư mời."
+        } else {
+          downloadMessage.textContent = "Không thể tạo ảnh thư mời. Vui lòng thử lại."
+          console.error("Không thể tạo/tải ảnh thư mời.", error)
+        }
+      } finally {
+        downloadButton.disabled = false
+        downloadButton.textContent = originalLabel
+      }
+    })
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -237,6 +431,19 @@
       submitBtn.disabled = false;
       submitBtn.textContent = originalButtonText;
       document.getElementById("acts").classList.remove("hide");
+      invitationImageBlob = null;
+      downloadButton.disabled = true;
+      const originalDownloadLabel = downloadButton.textContent;
+      downloadButton.textContent = "ĐANG CHUẨN BỊ...";
+      createInvitationImage().then(function (blob) {
+        invitationImageBlob = blob;
+      }).catch(function (error) {
+        downloadMessage.textContent = "Không thể chuẩn bị ảnh thư mời. Vui lòng thử lại bằng nút tải."
+        console.error("Không thể chuẩn bị ảnh thư mời.", error)
+      }).finally(function () {
+        downloadButton.disabled = false;
+        downloadButton.textContent = originalDownloadLabel;
+      });
       document.dispatchEvent(new CustomEvent("carousel:navigate", { detail: "#invitation-card" }));
 
       // try {
