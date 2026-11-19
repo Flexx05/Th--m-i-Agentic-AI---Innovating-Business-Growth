@@ -1351,11 +1351,13 @@ footer strong {
   }
 
   .event-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: clamp(20px, 4vh, 32px);
-    padding: clamp(24px, 6vw, 44px) clamp(20px, 5vw, 36px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(8px, 1.5svh, 14px);
+    padding: max(16px, env(safe-area-inset-top, 0px))
+      clamp(16px, 5vw, 36px)
+      max(16px, env(safe-area-inset-bottom, 0px));
   }
 
   .event-info-logo {
@@ -1373,16 +1375,24 @@ footer strong {
   }
 
   .event-info-location {
-    align-self: flex-start;
-    margin-top: auto;
+    align-self: start;
+    width: 100%;
+    margin: 0;
   }
 
   .event-info-timeline {
-    align-self: flex-end;
+    display: grid;
+    align-self: stretch;
+    width: 100%;
+    min-height: 0;
+    place-items: center;
+    transform: translateY(-clamp(4px, 1svh, 8px));
   }
 
   .event-info-timeline img {
-    max-height: none;
+    width: auto;
+    max-width: 100%;
+    max-height: min(54svh, calc(100svh - 270px));
   }
 
   .event-info-location .event-info-rubix,
@@ -1402,7 +1412,7 @@ footer strong {
     position: relative;
     inset: auto;
     align-self: center;
-    margin-bottom: auto;
+    margin: 0;
     text-align: center;
   }
 
